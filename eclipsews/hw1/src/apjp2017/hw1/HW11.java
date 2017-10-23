@@ -30,9 +30,9 @@ public class HW11 {
 	public enum BasicColor {
 		// BLACK(?), RED(?), BLUE(), GREEN(), CYAN(), MAGENTA(), YELLOW(),
 		// WHITE(),;
-		// replace the following code with yours!
-		BLACK(0, 0, 0), BLUE(0, 0, 0), GREEN(0, 0, 0), CYAN(0, 0, 0), RED(0, 0, 0), MAGENTA(0, 0,
-				0), YELLOW(0, 0, 0), WHITE(255, 255, 255);
+		// replace the following code with yours!ok
+		BLACK(0, 0, 0), BLUE(0, 0, 255), GREEN(0, 255, 0), CYAN(0, 255, 255), RED(255, 0, 0), MAGENTA(255, 0,
+				255), YELLOW(255, 255, 0), WHITE(255, 255, 255);
 
 		// rgb = r<<24 + g << 16 + b << 8 where r,g and b are an integer in [0,
 		// 255]
@@ -45,10 +45,11 @@ public class HW11 {
 		private static final int NO_BASIC_COLORS = 8;
 
 		private BasicColor(int r, int g, int b) {
-			// Replace the following code by yours!
-			rgb = 0;
-			
-			
+			// Replace the following code by yours!ok
+			this.rgb = 0;
+			this.rgb += r<<24;
+			this.rgb += g<<16;
+			this.rgb += b<<8;
 			
 			// Don't change following code!
 			if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0) {
@@ -66,8 +67,8 @@ public class HW11 {
 		 * Find the red component of this color. The result is either 0 or 255.
 		 */
 		public int getRed() {
-			// replace the following code by yours!
-			return 0;
+			// replace the following code by yours!ok
+			return rgb/(2<<24);
 		}
 
 		/**
@@ -75,16 +76,16 @@ public class HW11 {
 		 * 255.
 		 */
 		public int getGreen() {
-			// replace the following code by yours!
-			return 0;
+			// replace the following code by yours!ok
+			return ((rgb%(2<<24))/(2<<16));
 		}
 
 		/**
 		 * Find the blue component of this color. The result is either 0 or 255.
 		 */
 		public int getBlue() {
-			// replace the following code by yours!
-			return 0;
+			// replace the following code by yours!ok
+			return ((rgb%(2<<16))/2<<8);
 		}
 
 		/**
@@ -104,6 +105,7 @@ public class HW11 {
 		 */
 		public BasicColor complement() {
 			// replace the following code by yours!
+			switch()
 			return BLACK;
 		}
 
