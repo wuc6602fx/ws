@@ -42,13 +42,48 @@ public class HW12 {
 	  */
 	 public static String displayQBoard(EnumSet<EightQueenPosition> queens) {
 		 // replace following code with your implementation
-		 return 
-		 "-----------------\n" +
-		 "|X| | | | | | | |\n" +
-		 "-----------------\n" +
-		 "| | |X| | | | | |\n" +
-		 "...              \n"  ;
-		  }
+		 int[][] a = new int[8][8];
+		 for(EightQueenPosition q : queens) {
+			 a[q.row][q.col]++;
+		 }
+		 boolean isEmptyRow = true;
+		 String s = "";
+		 for(int r=0;r<8;r++) {
+			 
+			 
+			 for(int c=0;c<8;c++) {
+				 if(a[r][c]>0) {//queen at Position r,c
+					 if(isEmptyRow) {
+						 for(int i=0;i<c;i++) {
+							 s += "| ";
+						 }
+						 s += "|X";
+					 }
+					 else {
+						 //wrong!
+					 }
+					isEmptyRow = false;
+				 }
+				 else {
+					 if(isEmptyRow) {
+						 
+					 }else {
+						 s += "| ";
+					 }
+				 }
+			 }
+			 
+			 
+			 if (isEmptyRow) {
+				 s += "-----------------\n";
+			 }
+			 else {
+				 s += "|\n";
+			 }
+			 isEmptyRow = true;
+		 }
+		 return s;
+	}
 		
 		
 	/**TODO-method: 
@@ -71,14 +106,12 @@ public class HW12 {
 	 *  @return all solution boards which are extensions of the inpout board, or Emptyset.none() 
 	 *          if there is no solution.
 	 */
-//
-	/*
+	 
 	public static Set<EnumSet<EightQueenPosition>> getAllSolutions(EnumSet<EightQueenPosition> queens ){
 		// replace following code with your implementation
-			return queens;
+			return null;
 	}
-	*/
-//
+	
 	////////////////////////////////////////////////////////////
 	////// Add any additional methods/fields  from here      ///
 	///////////////////////////////////////////////////////////
@@ -156,6 +189,9 @@ public class HW12 {
 	 */
 	public void testDisplayQBoard() {
 		// write your test code here!
+		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00);
+		String s = displayQBoard(queens);
+		System.out.print(s);
 	}
 
 	/**
