@@ -127,7 +127,23 @@ public class HW11 {
 		 */
 		public BasicColor common(BasicColor c) {
 			// replace follow code by yours.
-			
+			if (this == c)
+				return this;
+			if (this == BLACK || c == BLACK)
+				return BLACK;
+			if (this == WHITE)
+				return c;
+			if (c == WHITE)
+				return this;
+			int r = this.getRed()/255	+	c.getRed()/255;
+			int g = this.getGreen()/255	+	c.getGreen()/255;
+			int b = this.getBlue()/255	+	c.getBlue()/255;
+			if (r==2)
+				return RED;
+			if (g==2)
+				return GREEN;
+			if (b==2)
+				return BLUE;
 			return BLACK;
 
 		}
