@@ -117,6 +117,28 @@ public class HW11 {
 			return null;
 		}
 
+		
+		// give (int)rgb to get BasicColor.value
+				public BasicColor rgb2BasicColor(int t) {
+					if (t == BLACK.getRGB())
+						return BLACK;
+					if (t == BLUE.getRGB())
+						return BLUE;
+					if (t == GREEN.getRGB())
+						return GREEN;
+					if (t == CYAN.getRGB())
+						return CYAN;
+					if (t == RED.getRGB())
+						return RED;
+					if (t == MAGENTA.getRGB())
+						return MAGENTA;
+					if (t == YELLOW.getRGB())
+						return YELLOW;
+					//if (t == WHITE.getRGB())
+						return WHITE;
+				}
+		
+		
 		/**
 		 * Find the resulting BasicColor consisting of primary colors common to
 		 * both this and input color c.
@@ -127,6 +149,7 @@ public class HW11 {
 		 */
 		public BasicColor common(BasicColor c) {
 			// replace follow code by yours.
+/*			
 			if (this == c)
 				return this;
 			if (this == BLACK || c == BLACK)
@@ -145,9 +168,12 @@ public class HW11 {
 			if (b==2)
 				return BLUE;
 			return BLACK;
-
+*/
+			int tmp = this.getRGB() & c.getRGB();
+			return rgb2BasicColor(tmp);
 		}
-
+		
+		
 		/**
 		 * Find the resulting BasicColor consisting of primary colors contained
 		 * in one and only one of both colors.
@@ -158,7 +184,8 @@ public class HW11 {
 		 */
 		public BasicColor exclusiveOr(BasicColor c) {
 			// replace follow code by yours.
-			return BLACK;
+			int tmp = this.getRGB() ^ c.getRGB();
+			return rgb2BasicColor(tmp);
 		}
 
 		/**
@@ -170,7 +197,8 @@ public class HW11 {
 		 */
 		public BasicColor mixedWith(BasicColor c) {
 			// replace follow code by yours.
-			return BLACK;
+			int tmp = this.getRGB() | c.getRGB();
+			return rgb2BasicColor(tmp);
 		}
 
 		/**
