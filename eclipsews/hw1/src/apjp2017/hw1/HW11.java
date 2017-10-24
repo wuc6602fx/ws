@@ -1,7 +1,9 @@
 package apjp2017.hw1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
 import apjp2017.hw1.HW11.BasicColor;
 import static apjp2017.hw1.HW11.BasicColor.*;
 
@@ -96,7 +98,7 @@ public class HW11 {
 		
 		
 		// give (int)rgb to get BasicColor.value
-		public BasicColor rgb2BasicColor(int t) {
+		public static BasicColor rgb2BasicColor(int t) {
 			if (t == BLACK.getRGB())
 				return BLACK;
 			if (t == BLUE.getRGB())
@@ -233,7 +235,7 @@ public class HW11 {
 		   */
 		  public static BasicColor getColor(int r, int g, int b){
 				// replace follow code by yours.
-				return null;
+				return rgb2BasicColor((r<<24) + (g<<16) + (b<<8));
 			 
 		  }
 
@@ -255,8 +257,15 @@ public class HW11 {
 			}
 
 			// Replace following code by yours
-            return null ;
-
+			
+			BasicColor b1 = rgb2BasicColor(p3.getRGB());
+			BasicColor b2 = rgb2BasicColor(p2.getRGB());
+			BasicColor b3 = rgb2BasicColor(p2.getRGB() + p3.getRGB());
+			BasicColor b4 = rgb2BasicColor(p1.getRGB());
+			BasicColor b5 = rgb2BasicColor(p1.getRGB() + p3.getRGB());
+			BasicColor b6 = rgb2BasicColor(p1.getRGB() + p2.getRGB());
+			BasicColor[] ans = {BLACK,b1,b2,b3,b4,b5,b6,WHITE};
+			return ans;
 		}
 
 		/**
