@@ -1,6 +1,7 @@
 package apjp2017.hw1;
 
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Set;
 import apjp2017.hw1.HW12.EightQueenPosition;
 import static apjp2017.hw1.HW12.EightQueenPosition.*;
@@ -86,53 +87,12 @@ public class HW12 {
 	}
 		
 		
+	
 	/**TODO-method: 
 	 * Given a set of board positions, determine if it is a solution of the 8-Queen problem.
 	 *  @param board  a set of positions
 	 *  @return true if it is a solution of 8 queens.
-	 */
-	 
-	 
-	public static int[][] banUpdate(int[][] ban,EightQueenPosition q){
-		for(int c=0;c<8;c++) {// |
-			ban[c][q.col]++;
-		}
-		for(int c=0;c<8;c++) {// 一
-			ban[q.row][c]++;
-		}
-		for(int c=0;c<8;c++) {
-			if(q.row+c<0||q.col-c<0||q.row+c>7||q.col-c>7){// /
-				
-			}
-			else {
-				ban[q.row+c][q.col-c]++;
-			}
-			if(q.row-c<0||q.col+c<0||q.row-c>7||q.col+c>7){
-				
-			}
-			else {
-				ban[q.row-c][q.col+c]++;
-			}
-			
-			
-			if(q.row-c<0||q.col-c<0||q.row-c>7||q.col-c>7){// \
-				
-			}
-			else {
-				ban[q.row-c][q.col-c]++;
-			}
-			if(q.row+c<0||q.col+c<0||q.row+c>7||q.col+c>7){
-				
-			}
-			else {
-				ban[q.row+c][q.col+c]++;
-			}
-		}
-		ban[q.row][q.col]-=3;
-		return ban;
-	}
-	 
-	 
+	 */ 
 	public static boolean isSolution(EnumSet<EightQueenPosition> queens ){
 		// replace following code with your implementation
 		int[][] ban = new int[8][8];
@@ -156,18 +116,63 @@ public class HW12 {
 	 *  @return all solution boards which are extensions of the inpout board, or Emptyset.none() 
 	 *          if there is no solution.
 	 */
-	 
 	public static Set<EnumSet<EightQueenPosition>> getAllSolutions(EnumSet<EightQueenPosition> queens ){
 		// replace following code with your implementation
-			return null;
+		Set<EnumSet<EightQueenPosition>> ans = new HashSet();	 	 
+		for(EightQueenPosition newQ: EightQueenPosition.values()) {
+			if(!queens.contains(newQ)) {
+				queens.add(newQ);
+				if(isSolution(queens)) {
+					ans.add(queens); 
+				}
+				queens.remove(newQ);
+			}
+		}
+		return ans;
 	}
-	
+
+
+
 	////////////////////////////////////////////////////////////
 	////// Add any additional methods/fields  from here      ///
-	///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////	
 	
-			
+	//add positions that are invalid anymore.
+	public static int[][] banUpdate(int[][] ban,EightQueenPosition q){
+		for(int c=0;c<8;c++) {// |
+			ban[c][q.col]++;
+		}
+		for(int c=0;c<8;c++) {// 一
+			ban[q.row][c]++;
+		}
+		for(int c=0;c<8;c++) {
+			if(q.row+c<0||q.col-c<0||q.row+c>7||q.col-c>7){// /			
+			}
+			else {
+				ban[q.row+c][q.col-c]++;
+			}
+			if(q.row-c<0||q.col+c<0||q.row-c>7||q.col+c>7){		
+			}
+			else {
+				ban[q.row-c][q.col+c]++;
+			}		
+			if(q.row-c<0||q.col-c<0||q.row-c>7||q.col-c>7){// \	
+			}
+			else {
+				ban[q.row-c][q.col-c]++;
+			}
+			if(q.row+c<0||q.col+c<0||q.row+c>7||q.col+c>7){				
+			}
+			else {
+				ban[q.row+c][q.col+c]++;
+			}
+		}
+		ban[q.row][q.col]-=3;
+		return ban;
 	}
+	
+	
+}
 	
 	
 	static int nTests = 0;   // each test may produce multiple errors!
@@ -262,10 +267,10 @@ public class HW12 {
 	 * 
 	 * @param args
 	 */
-	public  void testIsSolution() {
+	public  void testIsSolution() {//test data used from wiki https://en.wikipedia.org/wiki/Eight_queens_puzzle
 		// write your test code here!
 		test();
-		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P21,EightQueenPosition.P42,EightQueenPosition.P63,EightQueenPosition.P35);
+		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P60,EightQueenPosition.P41,EightQueenPosition.P22,EightQueenPosition.P03,EightQueenPosition.P54,EightQueenPosition.P75,EightQueenPosition.P16,EightQueenPosition.P37);
 		boolean ans = isSolution(queens);
 		if(!ans) {
 			error("isSolution() is not correct!\nRequire:\n"+true+"\nYours:\n"+ans);
@@ -281,6 +286,19 @@ public class HW12 {
 	 */
 	public  void testGetAllSolutions() {
 		// write your test code here!
+		test();
+		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P60,EightQueenPosition.P41,EightQueenPosition.P22,EightQueenPosition.P03,EightQueenPosition.P54,EightQueenPosition.P75,EightQueenPosition.P16);
+		Set<EnumSet<EightQueenPosition>> ans = getAllSolutions(queens);
+		Set<EnumSet<EightQueenPosition>> rlt = new HashSet(EnumSet.of(EightQueenPosition.P60,EightQueenPosition.P41,EightQueenPosition.P22,EightQueenPosition.P03,EightQueenPosition.P54,EightQueenPosition.P75,EightQueenPosition.P16,EightQueenPosition.P37));
+		if(ans.isEmpty()) {
+			error("Your answer from getAllSolutions() are null\n");
+		}
+		else if(ans.contains(rlt)) {
+			error("getAllSolutions() is not correct!\nRequire:\n"+rlt+"\nYours:\n"+ans);
+		}
+		else {
+			System.out.println("getAllSolutions() is correct!");
+		}
 	}		 
 	 
 	
