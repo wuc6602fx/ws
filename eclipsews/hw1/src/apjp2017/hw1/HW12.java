@@ -92,9 +92,59 @@ public class HW12 {
 	 *  @return true if it is a solution of 8 queens.
 	 */
 	 
+	 
+	public static int[][] banUpdate(int[][] ban,EightQueenPosition q){
+		for(int c=0;c<8;c++) {// |
+			ban[c][q.col]++;
+		}
+		for(int c=0;c<8;c++) {// 一
+			ban[q.row][c]++;
+		}
+		for(int c=0;c<8;c++) {
+			if(q.row+c<0||q.col-c<0||q.row+c>7||q.col-c>7){// /
+				
+			}
+			else {
+				ban[q.row+c][q.col-c]++;
+			}
+			if(q.row-c<0||q.col+c<0||q.row-c>7||q.col+c>7){
+				
+			}
+			else {
+				ban[q.row-c][q.col+c]++;
+			}
+			
+			
+			if(q.row-c<0||q.col-c<0||q.row-c>7||q.col-c>7){// \
+				
+			}
+			else {
+				ban[q.row-c][q.col-c]++;
+			}
+			if(q.row+c<0||q.col+c<0||q.row+c>7||q.col+c>7){
+				
+			}
+			else {
+				ban[q.row+c][q.col+c]++;
+			}
+		}
+		ban[q.row][q.col]-=3;
+		return ban;
+	}
+	 
+	 
 	public static boolean isSolution(EnumSet<EightQueenPosition> queens ){
 		// replace following code with your implementation
-			return false;
+		int[][] ban = new int[8][8];
+		for(EightQueenPosition q : queens) {
+			if(ban[q.row][q.col]>0) {
+				return false;
+			}
+			else {
+				ban = banUpdate(ban,q);
+			}
+		}
+			return true;
 	}
 	
 	
@@ -190,8 +240,8 @@ public class HW12 {
 	public void testDisplayQBoard() {
 		// write your test code here!
 		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00);
-		String s = displayQBoard(queens);
-		System.out.print(s);
+		String ans = displayQBoard(queens);
+		System.out.print(ans);
 	}
 
 	/**
@@ -200,6 +250,12 @@ public class HW12 {
 	 */
 	public  void testIsSolution() {
 		// write your test code here!
+		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P11);
+		boolean ans = isSolution(queens);
+		System.out.println(ans);
+		queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P46,EightQueenPosition.P27);
+		ans = isSolution(queens);
+		System.out.println(ans);
 	}
 
 	/**
