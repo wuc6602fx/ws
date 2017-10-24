@@ -46,10 +46,7 @@ public class HW11 {
 
 		private BasicColor(int r, int g, int b) {
 			// Replace the following code by yours!ok
-			this.rgb = 0;
-			this.rgb += r<<24;
-			this.rgb += g<<16;
-			this.rgb += b<<8;
+			rgb = (r<<24) + (g<<16) + (b<<8); 
 			
 			// Don't change following code!
 			if (r > 255 || r < 0 || g > 255 || g < 0 || b > 255 || b < 0) {
@@ -68,7 +65,7 @@ public class HW11 {
 		 */
 		public int getRed() {
 			// replace the following code by yours!ok
-			return rgb/(2<<24);
+			return ((rgb>>24)==-1)?255:(rgb>>24);
 		}
 
 		/**
@@ -77,7 +74,7 @@ public class HW11 {
 		 */
 		public int getGreen() {
 			// replace the following code by yours!ok
-			return ((rgb%(2<<24))/(2<<16));
+			return ((rgb<<8>>24)==-1)?255:(rgb<<8>>24);
 		}
 
 		/**
@@ -85,7 +82,7 @@ public class HW11 {
 		 */
 		public int getBlue() {
 			// replace the following code by yours!ok
-			return ((rgb%(2<<16))/2<<8);
+			return ((rgb<<16>>24)==-1)?255:(rgb<<16>>24);
 		}
 
 		/**
@@ -105,8 +102,19 @@ public class HW11 {
 		 */
 		public BasicColor complement() {
 			// replace the following code by yours!
-			switch()
-			return BLACK;
+			// BLACK(0, 0, 0), BLUE(0, 0, 255), GREEN(0, 255, 0), CYAN(0, 255, 255), RED(255, 0, 0), MAGENTA(255, 0,
+			//255), YELLOW(255, 255, 0), WHITE(255, 255, 255);
+			switch(this) {
+			case BLACK: return WHITE;
+			case BLUE: return YELLOW;
+			case GREEN: return MAGENTA;
+			case CYAN: return RED;
+			case RED: return CYAN;
+			case MAGENTA: return GREEN;
+			case YELLOW: return BLUE;
+			case WHITE: return BLACK;
+			}
+			return null;
 		}
 
 		/**
@@ -119,6 +127,7 @@ public class HW11 {
 		 */
 		public BasicColor common(BasicColor c) {
 			// replace follow code by yours.
+			
 			return BLACK;
 
 		}
