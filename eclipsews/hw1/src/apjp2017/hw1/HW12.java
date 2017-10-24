@@ -239,9 +239,23 @@ public class HW12 {
 	 */
 	public void testDisplayQBoard() {
 		// write your test code here!
+		test();
 		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00);
+		String rlt = "|X| | | | | | | |\n" + 
+				"-----------------\n" + 
+				"-----------------\n" + 
+				"-----------------\n" + 
+				"-----------------\n" + 
+				"-----------------\n" + 
+				"-----------------\n" + 
+				"-----------------\n";
 		String ans = displayQBoard(queens);
-		System.out.print(ans);
+		if(!rlt.equals(ans)) {
+			error("DisplayQBoard() is not correct!\nRequire:\n"+rlt+"\nYours:\n"+ans);
+		}
+		else {
+			System.out.println("DisplayQBoard() is correct!");
+		}
 	}
 
 	/**
@@ -250,12 +264,15 @@ public class HW12 {
 	 */
 	public  void testIsSolution() {
 		// write your test code here!
-		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P11);
+		test();
+		EnumSet<EightQueenPosition> queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P21,EightQueenPosition.P42,EightQueenPosition.P63,EightQueenPosition.P35);
 		boolean ans = isSolution(queens);
-		System.out.println(ans);
-		queens = EnumSet.of(EightQueenPosition.P00,EightQueenPosition.P46,EightQueenPosition.P27);
-		ans = isSolution(queens);
-		System.out.println(ans);
+		if(!ans) {
+			error("isSolution() is not correct!\nRequire:\n"+true+"\nYours:\n"+ans);
+		}
+		else {
+			System.out.println("isSolution() is correct!");
+		}
 	}
 
 	/**
