@@ -93,6 +93,28 @@ public class HW11 {
 		public int getRGB() {
 			return rgb;
 		}
+		
+		
+		// give (int)rgb to get BasicColor.value
+		public BasicColor rgb2BasicColor(int t) {
+			if (t == BLACK.getRGB())
+				return BLACK;
+			if (t == BLUE.getRGB())
+				return BLUE;
+			if (t == GREEN.getRGB())
+				return GREEN;
+			if (t == CYAN.getRGB())
+				return CYAN;
+			if (t == RED.getRGB())
+				return RED;
+			if (t == MAGENTA.getRGB())
+				return MAGENTA;
+			if (t == YELLOW.getRGB())
+				return YELLOW;
+			//if (t == WHITE.getRGB())
+				return WHITE;
+		}
+		
 
 		/**
 		 * Get the complement color of this color. For instance,
@@ -104,6 +126,7 @@ public class HW11 {
 			// replace the following code by yours!
 			// BLACK(0, 0, 0), BLUE(0, 0, 255), GREEN(0, 255, 0), CYAN(0, 255, 255), RED(255, 0, 0), MAGENTA(255, 0,
 			//255), YELLOW(255, 255, 0), WHITE(255, 255, 255);
+		
 			switch(this) {
 			case BLACK: return WHITE;
 			case BLUE: return YELLOW;
@@ -115,28 +138,10 @@ public class HW11 {
 			case WHITE: return BLACK;
 			}
 			return null;
+
+//			return rgb2BasicColor(~this.getRGB());
 		}
 
-		
-		// give (int)rgb to get BasicColor.value
-				public BasicColor rgb2BasicColor(int t) {
-					if (t == BLACK.getRGB())
-						return BLACK;
-					if (t == BLUE.getRGB())
-						return BLUE;
-					if (t == GREEN.getRGB())
-						return GREEN;
-					if (t == CYAN.getRGB())
-						return CYAN;
-					if (t == RED.getRGB())
-						return RED;
-					if (t == MAGENTA.getRGB())
-						return MAGENTA;
-					if (t == YELLOW.getRGB())
-						return YELLOW;
-					//if (t == WHITE.getRGB())
-						return WHITE;
-				}
 		
 		
 		/**
@@ -169,8 +174,7 @@ public class HW11 {
 				return BLUE;
 			return BLACK;
 */
-			int tmp = this.getRGB() & c.getRGB();
-			return rgb2BasicColor(tmp);
+			return rgb2BasicColor(this.getRGB() & c.getRGB());
 		}
 		
 		
@@ -184,8 +188,7 @@ public class HW11 {
 		 */
 		public BasicColor exclusiveOr(BasicColor c) {
 			// replace follow code by yours.
-			int tmp = this.getRGB() ^ c.getRGB();
-			return rgb2BasicColor(tmp);
+			return rgb2BasicColor(this.getRGB() ^ c.getRGB());
 		}
 
 		/**
@@ -197,8 +200,7 @@ public class HW11 {
 		 */
 		public BasicColor mixedWith(BasicColor c) {
 			// replace follow code by yours.
-			int tmp = this.getRGB() | c.getRGB();
-			return rgb2BasicColor(tmp);
+			return rgb2BasicColor(this.getRGB() | c.getRGB());
 		}
 
 		/**
@@ -212,7 +214,11 @@ public class HW11 {
 		 */
 		public static BasicColor combine(BasicColor... colors) {
 			// replace follow code by yours.
-			return BLACK;
+			BasicColor b = BLACK;
+			for(BasicColor c: colors) {
+				b = b.mixedWith(c);
+			}
+			return b;
 
 		}
 		
