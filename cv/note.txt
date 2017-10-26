@@ -1,0 +1,6 @@
+1. Create directory under the .cpp
+2. cd to directory
+3. cmake ..
+4. make
+5. execute the app
+
