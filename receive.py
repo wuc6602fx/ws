@@ -15,7 +15,7 @@ def callback(ch, method, properties, body):
 
 
 # notify server use it as callback
-channel.basic_consume(callback, queue='hello', no_ack=True)
+channel.basic_consume(callback, queue='hello')
 
 
 # start to receive

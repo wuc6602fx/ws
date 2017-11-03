@@ -258,12 +258,12 @@ public class HW11 {
 
 			// Replace following code by yours
 			
-			BasicColor b1 = rgb2BasicColor(p3.getRGB());
-			BasicColor b2 = rgb2BasicColor(p2.getRGB());
-			BasicColor b3 = rgb2BasicColor(p2.getRGB() + p3.getRGB());
-			BasicColor b4 = rgb2BasicColor(p1.getRGB());
-			BasicColor b5 = rgb2BasicColor(p1.getRGB() + p3.getRGB());
-			BasicColor b6 = rgb2BasicColor(p1.getRGB() + p2.getRGB());
+			BasicColor b1 = rgb2BasicColor(p3.getRGB());//001
+			BasicColor b2 = rgb2BasicColor(p2.getRGB());//010
+			BasicColor b3 = rgb2BasicColor(p2.getRGB() + p3.getRGB());//011
+			BasicColor b4 = rgb2BasicColor(p1.getRGB());//100
+			BasicColor b5 = rgb2BasicColor(p1.getRGB() + p3.getRGB());//101
+			BasicColor b6 = rgb2BasicColor(p1.getRGB() + p2.getRGB());//110
 			BasicColor[] ans = {BLACK,b1,b2,b3,b4,b5,b6,WHITE};
 			return ans;
 		}
