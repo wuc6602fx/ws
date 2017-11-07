@@ -20,10 +20,12 @@ def on_request(ch, method, props, body):
             routing_key=props.reply_to,
             properties=pika.BasicProperties(correlation_id = \
                                                 props.correlation_id),
-            body=str(response))
+                                                    body=str(response))
     ch.basic_ack(delivery_tag = method.delivery_tag)
 
 channel.basic_qos(prefetch_count=1)
+
+#It's executed when the request is received. It does the work and sends the response back.
 channel.basic_consume(on_request, queue='rpc_queue')
 print(" [x] Awaiting RPC requests")
 channel.start_consuming()
