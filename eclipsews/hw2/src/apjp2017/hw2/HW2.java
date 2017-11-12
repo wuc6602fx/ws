@@ -31,7 +31,7 @@ public class HW2 {
 	public static Set<Class<?>> getAllInterfaces(Class<?> c) {
 		// TO-DO: put your code here!
 		Set<Class<?>> rlt = new HashSet<>();
-		c.getClasses();
+		System.out.println("hahahahaha"+c.getClasses().toString());
 		return rlt;
 	}
 
