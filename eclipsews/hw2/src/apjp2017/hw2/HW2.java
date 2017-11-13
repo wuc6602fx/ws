@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,9 +32,14 @@ public class HW2 {
 	public static Set<Class<?>> getAllInterfaces(Class<?> c) {
 		// TO-DO: put your code here!
 		Set<Class<?>> rlt = new HashSet<>();
-		Class[] tmp = c.getClasses();
-		for(Class i : tmp) {
-			rlt.add(i);
+		
+		Class<?>[] classes = c.getInterfaces();
+		for(Class<?> aClass : classes) {
+			rlt.add(aClass);
+			Class<?>[] faces = (aClass.getInterfaces());
+			for(Class<?> face:faces) {
+				rlt.add(face);
+			}
 		}
 		return rlt;
 	}
@@ -51,7 +57,16 @@ public class HW2 {
 	 */
 	public static Set<Method> findAllPackageMethods(Class<?> c) {
 		// To-DO: put your code here!
-		return null;
+		Method[] methods = c.getDeclaredMethods();
+		Set<Method> rlt = new HashSet<>();
+		for(Method aMethod : methods) {
+			if(!Modifier.isPublic(aMethod.getModifiers()))
+				if(!Modifier.isPrivate(aMethod.getModifiers()))
+					if(!Modifier.isProtected(aMethod.getModifiers()))
+						rlt.add(aMethod);
+		}
+		
+		return rlt;
 
 	}
 
@@ -73,7 +88,23 @@ public class HW2 {
 	 */
 	public static Set<Method> findAllPrimitiveMethods(Class<?> c) {
 		// TO-DO: put your code here!
-		return null;
+		Method[] methods = c.getDeclaredMethods();
+		Set<Method> rlt = new HashSet<>();
+		for(Method aMethod : methods) {
+			if(aMethod.getReturnType().isPrimitive()) {
+				Class<?>[] classes = aMethod.getParameterTypes();
+				int count = 0;
+				for(Class<?> aClass : classes) {
+					if(aClass.isPrimitive()) {
+						count++;
+					}
+				}
+				if(count == classes.length)
+					rlt.add(aMethod);
+				count = 0;
+			}
+		}
+		return rlt;
 
 	}
 
@@ -100,6 +131,7 @@ public class HW2 {
 		m.setAccessible(true);
 
 		// TO-DO: put your code here!
+		
 		return 0;
 	}
 
@@ -126,8 +158,10 @@ public class HW2 {
 		f.setAccessible(true); // in order to access normally inaccessible field, we need set this flag.
 //9 types case by case
 		// TO-DO: put your code here!
-
-		return ;
+	
+	    //setField from obj to nobj
+	    f.set(nobj, f.get(obj));
+		return;
 	}
 
 	/**
@@ -170,7 +204,24 @@ public class HW2 {
 		Object rlt = null;
 
 		//TO-DO: Put your code here!
-
+		Class<?> aClass = obj.getClass();
+		rlt = aClass.newInstance();
+		while (aClass != null) {
+			
+			List<Field> fields = new ArrayList<>();
+		    for (Field field : aClass.getDeclaredFields()) {
+		        fields.add(field);
+		    }
+		    for (Field field : fields) {
+		        field.setAccessible(true);
+		        //setField from obj to nobj
+		        if(!Modifier.isStatic(field.getModifiers()))
+		        	field.set(rlt, field.get(obj));
+		    }
+			
+		    //go to superclass
+	        aClass = aClass.getSuperclass();
+	    }
 		return rlt;
 
 	}
@@ -255,7 +306,24 @@ public class HW2 {
 		 testReflectiveCopy() ;
 		
 		// Write your test code for other problems here!
-
+		 System.out.println("\n[1]test getAllInterfaces");
+		 Set<Class<?>> c = getAllInterfaces(ArrayList.class);
+		 System.out.println("Interfaces = "+c);
+		 
+		 System.out.println("\n[2]Test findAllPackageMethods");
+		 Set<Method> m = findAllPackageMethods(ArrayList.class);
+		 System.out.println("package methods = "+m);
+		 
+		 System.out.println("\n[3]Test findAllPrimitiveMethods");
+		 Set<Method> m2 = HW2.findAllPrimitiveMethods(String.class);
+		 System.out.println("primitve methods = "+m2);
+		 
+		 System.out.println("\n[4]Test copyNonStaticField");
+		 B obj = B.getB1();
+		 B nobj = new B();
+		 System.out.println("obj.f = "+ obj.y);
+		 HW2.copyNonStaticField(B.class.getDeclaredField("y"), obj, nobj);
+		 System.out.println("nobj.f = "+ nobj.y);
 	}
 
 }
