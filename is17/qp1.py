@@ -1,5 +1,4 @@
 #Recursive solution for N-Queens problem in Python
-#import math
 import sys
 
 x = {}

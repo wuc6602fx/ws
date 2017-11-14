@@ -1,1 +1,0 @@
-{"properties": {"all_visible": false}, "categories": {}, "notes": [{"properties": {"size": [200, 150], "position": [1552, 24], "locked": false}, "body": "git pull origin master\ngit add -all\ngit commit -m \"@@@\"\ngit push origin master", "last_modified": "2017-10-24T14:51:57", "cat": "", "uuid": "27856e4f-523d-44dd-9735-cc2898c449ee"}]}
