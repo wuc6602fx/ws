@@ -9,10 +9,10 @@ channel.queue_declare(queue='hello')
 
 # make a callback function
 def callback(ch, method, properties, body):
-    print " [x] Received %r" % (body,)
+    print (" [x] Received %r" % body)
 
 # notify server use it as callback
-channel.basic_consume(callback, queue='hello', no_ack=True)
+channel.basic_consume(callback, queue='hello', no_ack=False)
 
 # start to receive
 channel.start_consuming()
