@@ -1,11 +1,11 @@
-K = 8   #Board size
-P = 8   #Queen force
+K = 10  #Board size
+P = 3   #Queen force
 
-def under_attack(col,queens):
+def under_attack(col,queens,n):
     left = right = col
     for r,c in queens[::-1]:    #reverse queens
         left, right = left-1, right+1   #left, right be reduced gradually
-        if r>P: #Determine Whether out of queen force
+        if n-r>P: #Determine Whether out of queen force
             return False
         if c in (left, col, right): #Because we use top-bottom way, so we only need to detect upper position
             return True
@@ -19,7 +19,7 @@ def solve(n):
     return[solution+[(n,i+1)]
             for i in range(K)
                 for solution in smaller_solutions
-                    if not under_attack(i+1, solution)]
+                if not under_attack(i+1, solution, n)]#parameter(col[1:i+1], each smaller_solutions, board size now)
 
 #Method to display chess board
 def display_board(queens):
