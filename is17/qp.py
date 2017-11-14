@@ -1,13 +1,7 @@
-<<<<<<< HEAD
 K = 8   #Board size
 P = 8   #Queen force
 pre = [(4,5),(7,7)] #prelocate
-#pre = []
 
-=======
-K = 10  #Board size
-P = 3   #Queen force
->>>>>>> 52e79a3d04d94aca0a6d5f673f7b6d9087b23e0a
 
 def under_attack(col,queens,n):
     left = right = col
@@ -34,13 +28,9 @@ def solve(n):
 #Method to display chess board
 def display_board(queens):
     q_icon =  "♕"
-    print('='*64)
     for i in range(1,K+1):
         print(K-i+1,'\t|'*(queens[i-1][1]),' ',q_icon,'  |','\t|'*(K-queens[i-1][1]))
-        if i == K:
-            print('='*64)
-        else:
-            print("-"*64)
+        print("-"*80)
 
 
 #for calculate, we rotate the board 90 degrees with clockwise
