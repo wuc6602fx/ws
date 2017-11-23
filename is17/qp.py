@@ -1,7 +1,7 @@
 K = 8   #Board size
 P = 8   #Queen force
-pre = [(4,5),(7,7)] #prelocate
-
+#pre = [(4,5),(7,7)] #prelocate
+pre = []
 
 def under_attack(col,queens,n):
     left = right = col
@@ -39,10 +39,12 @@ def rotate_board(queens):
     for q in queens:
         rlt.append((K - q[1] + 1, q[0]))
     return rlt
-
-
 r_pre = rotate_board(pre)
+
+
+#Start from here
 answers = solve(K)
+
 #if member in pre not in the answer, the answer should be remove
 if len(pre)>0:
     new_answers = []
@@ -54,12 +56,13 @@ if len(pre)>0:
             else:
                 break
     answers = new_answers
-
 counts = len(answers)
 print('K = ',K,' P = ',P,' has ',counts,' solutions.')
+i=1
 for answer in answers:
+    print('\nMethod ', i)
     display_board(answer)
-    print(answer,'\n')
+    i+=1
 if len(pre)>0:
     print('Prelocate = ',pre)
 if len(answers)>50:

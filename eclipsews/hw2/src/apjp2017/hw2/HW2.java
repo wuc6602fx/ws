@@ -4,6 +4,7 @@ package apjp2017.hw2;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -125,14 +126,13 @@ public class HW2 {
 	 *            an object whose class contains method m.
 	 * @return the result of obj.m(0,...0) as a double value
 	 */
-	public static double defaultValueOfNumericMethod(Method m, Object obj) {
+	public static double defaultValueOfNumericMethod(Method m, Object obj) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, InstantiationException {
 		// In order to access methods normal java access does not allow,
 		// we need set the accessiblity flag of the method/field/constructor to true.
 		m.setAccessible(true);
-
 		// TO-DO: put your code here!
-		
-		return 0;
+		double d = (double)m.invoke(obj,0);
+		return d;
 	}
 
 	/**
@@ -318,7 +318,12 @@ public class HW2 {
 		 Set<Method> m2 = HW2.findAllPrimitiveMethods(String.class);
 		 System.out.println("primitve methods = "+m2);
 		 
-		 System.out.println("\n[4]Test copyNonStaticField");
+		 System.out.println("\n[4]Test defaultValueOfNumericMethod");
+		 double d = HW2.defaultValueOfNumericMethod(Math.class.getMethod("cos",double.class), null);
+		 System.out.println(d);
+		 
+		 
+		 System.out.println("\n[5]Test copyNonStaticField");
 		 B obj = B.getB1();
 		 B nobj = new B();
 		 System.out.println("obj.f = "+ obj.y);
