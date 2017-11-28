@@ -1,5 +1,5 @@
-K = 8   #Board size
-P = 8   #Queen force
+K = 10   #Board size
+P = 10   #Queen force
 #pre = [(4,5),(7,7)] #prelocate
 pre = []
 
@@ -30,7 +30,7 @@ def display_board(queens):
     q_icon =  "♕"
     for i in range(1,K+1):
         print(K-i+1,'\t|'*(queens[i-1][1]),' ',q_icon,'  |','\t|'*(K-queens[i-1][1]))
-        print("-"*80)
+        print("-"*(8*K+9))
 
 
 #for calculate, we rotate the board 90 degrees with clockwise
