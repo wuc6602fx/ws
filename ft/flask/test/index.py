@@ -1,5 +1,4 @@
 from flask import Flask, render_template, request
-from mf import run
 
 app = Flask(__name__)
 
@@ -7,12 +6,14 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/result', methods=['POST'])
+@app.route('/know', methods=['POST'])
 def login():
     a = request.form['a']
-    x,y = run()
-    x = x+int(a)
-    return render_template('result.html', x=x,y=y)
-
+    return render_template('policy.html',a)
+@app.route('/policy', methods=['POST'])
+@app.route('/compare', methods=['POST'])
+@app.route('/member', methods=['POST'])
+def x():
+    return 0
 if __name__ == '__main__':
     app.run(debug=True)
